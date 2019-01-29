@@ -8,7 +8,8 @@ class Modal extends Component {
     
     // we do this to not unnessarily update the model and order summary, can test with componentwillupdate
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.show !== this.props.show;
+        return nextProps.show !== this.props.show ||
+            nextProps.children !== this.props.children;
     }
 
     render() {
