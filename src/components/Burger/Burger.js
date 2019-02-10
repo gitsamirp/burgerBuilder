@@ -3,10 +3,8 @@ import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burger = ( props ) => {
-    console.log(props.ingredients);
-    console.log(props.ingredients.length);
     let transformedIngredients = null;
-    if (props.ingredients.length == 0) {
+    if (Object.keys(props.ingredients).length == 0) {
         transformedIngredients = "Please add Ingredients";
     } else {
         transformedIngredients = Object.keys(props.ingredients).map(igKey => {
