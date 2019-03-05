@@ -35,10 +35,7 @@ const reducer = (state = inititalState, action) => {
             return updateObject(state, {
                 orders: action.orders,
                 loading: false
-            })
-        case actionTypes.PURCHASE_BURGER_FAILED:
-            return updateObject(state, {loading: false});
-        
+            });
         default:
             return {
                 ...state
