@@ -4,7 +4,7 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burger = ( props ) => {
     let transformedIngredients = null;
-    if (Object.keys(props.ingredients).length == 0) {
+    if (Object.keys(props.ingredients).length === 0) {
         transformedIngredients = "Please add Ingredients";
     } else {
         transformedIngredients = Object.keys(props.ingredients).map(igKey => {

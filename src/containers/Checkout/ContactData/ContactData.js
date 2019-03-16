@@ -110,7 +110,6 @@ class ContactData extends Component {
             orderData: formData,
             userId: this.props.userId
         }
-        console.log(order);
         this.props.onPurchaseOrder(order, this.props.token);
     }
 
