@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import Checkout from './containers/Checkout/Checkout';
 import {Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import Orders from './containers/Orders/Orders';
-import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index';
+import asyncComponent from './hoc/asyncComponent/asyncComponent';
 
+const asyncCheckout = asyncComponent(() => {
+  return import('./containers/Checkout/Checkout');
+});
+const asyncOrders = asyncComponent(() => {
+  return import('./containers/Orders/Orders');
+});
+const asyncAuth = asyncComponent(() => {
+  return import('./containers/Auth/Auth');
+});
 class App extends Component {
   componentDidMount () {
     this.props.onTryAutoSignup();
@@ -17,7 +24,7 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
-        <Route path="/auth" exact component={Auth}></Route>
+        <Route path="/auth" exact component={asyncAuth}></Route>
         <Route path="/" exact component={BurgerBuilder}></Route>
         <Redirect to="/"></Redirect>
       </Switch>
@@ -26,9 +33,9 @@ class App extends Component {
     if (this.props.isAuthenticated) {
       routes = (
         <Switch>
-          <Route path="/checkout" component={Checkout}></Route>
-          <Route path="/orders" exact component={Orders}></Route>
-          <Route path="/auth" exact component={Auth}></Route>
+          <Route path="/checkout" component={asyncCheckout}></Route>
+          <Route path="/orders" exact component={asyncOrders}></Route>
+          <Route path="/auth" exact component={asyncAuth}></Route>
           <Route path="/" exact component={BurgerBuilder}></Route>
           <Route path="/logout" exact component={Logout}></Route>
           <Redirect to="/"></Redirect>
