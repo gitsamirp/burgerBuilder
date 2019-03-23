@@ -8,10 +8,12 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Axios from '../../axios-orders';
+import Transition from 'react-transition-group/Transition';
 
 export class BurgerBuilder extends Component {
     state = {
-        purchasing: false
+        purchasing: false,
+        showBlock: false
     };
 
     componentDidMount() {
@@ -58,6 +60,24 @@ export class BurgerBuilder extends Component {
         let burger = this.props.error ? <p>Ingredients cant be loaded</p>:<Spinner></Spinner>
         if (this.props.ings) {
             burger = (<><Burger ingredients={this.props.ings}></Burger>
+                <button onClick={() => this.setState(prevState => ({showBlock: !prevState.showBlock}))}>Toggle</button>
+                <Transition 
+                    in={this.state.showBlock} 
+                    timeout={300}
+                    mountOnEnter
+                    unmountOnExit
+                    >
+                    {state => ( <div style={
+                        {
+                            backgroundColor: "red",
+                            width: 100,
+                            height: 100,
+                            margin: "auto",
+                            transition: "opacity 0.3s ease-out",
+                            opacity: state === 'exiting' ? 0 : 1
+                        }
+                    }></div>)}
+                </Transition>
                 <BuildControls 
                 ingredientAdded={this.props.onIngredientAdded}
                 ingredientRemoved={this.props.onIngredientRemoved}
