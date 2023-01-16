@@ -1,3 +1,16 @@
+# Burger Builder
+Project written alongside https://www.udemy.com/course/react-the-complete-guide-incl-redux/
+
+Written with React version 16.8
+
+- Skills
+  - React
+  - Redux
+  - Firebase
+  
+  
+  
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
